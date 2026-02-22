@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Admin Dashboard</h2>
+
+<a href="/admin/logout" class="btn btn-danger mb-3">Logout</a>
+
+<hr>
+
+<h4>Add Product</h4>
+
+<form method="POST" action="/admin/add-product" enctype="multipart/form-data">
+    <input class="form-control mb-2" name="name" placeholder="Product Name" required>
+
+    <textarea class="form-control mb-2"
+              name="description"
+              placeholder="Product Description"
+              required></textarea>
+
+    <input type="file" class="form-control mb-2" name="image">
+
+    <button class="btn btn-primary">Add Product</button>
+</form>
+
+<hr>
+
+<h4>Existing Products</h4>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>
+                {% if product.image %}
+                <img src="{{ url_for('static', filename='uploads/' + product.image) }}"
+                     width="80">
+                {% else %}
+                No Image
+                {% endif %}
+            </td>
+            <td>
+                <a href="/admin/delete/{{ product.id }}"
+                   class="btn btn-sm btn-danger">
+                   Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

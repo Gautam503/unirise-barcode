@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="hero-section mb-5">
+    <h1 class="display-5 fw-bold">Smart Industrial Barcode Solutions</h1>
+    <p class="lead mt-3">
+        Reliable • Secure • Scalable Barcode & QR Systems for Manufacturing & Enterprise
+    </p>
+    <a href="/contact" class="btn btn-primary mt-3">
+        Request Consultation
+    </a>
+</div>
+
+<div class="row text-center mb-5">
+
+    <div class="col-md-4">
+        <h2 class="fw-bold text-primary">250+</h2>
+        <p>Projects Delivered</p>
+    </div>
+
+    <div class="col-md-4">
+        <h2 class="fw-bold text-primary">120+</h2>
+        <p>Happy Clients</p>
+    </div>
+
+    <div class="col-md-4">
+        <h2 class="fw-bold text-primary">15+</h2>
+        <p>Industries Served</p>
+    </div>
+
+</div>
+
+<h3 class="mb-4 fw-bold">Our Solutions</h3>
+<div class="row">
+{% for product in products %}
+<div class="col-md-4">
+    <div class="card mb-4">
+        {% if product.image %}
+<img src="{{ url_for('static', filename='uploads/' + product.image) }}"
+     class="card-img-top"
+     style="height:200px; object-fit:cover;">
+        {% endif %}
+        <div class="card-body">
+            <h5>
+    <a href="/product/{{ product.id }}" class="text-dark text-decoration-none">
+        {{ product.name }}
+    </a>
+            </h5>
+            <p>{{ product.description }}</p>
+          <a href="https://wa.me/918920562293?text={{ ('Hello I am interested in ' ~ product.name)|urlencode }}"
+   class="btn btn-success w-100"
+   target="_blank">
+   Enquire on WhatsApp
+          </a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+<hr>
+
+<h4>Contact Us for Enquiry</h4>
+
+<form method="POST" action="/enquiry">
+    <input class="form-control mb-2" name="name" placeholder="Your Name" required>
+    <input class="form-control mb-2" name="email" placeholder="Your Email" required>
+    <input class="form-control mb-2" name="phone" placeholder="Phone Number" required>
+    <textarea class="form-control mb-2" name="message" placeholder="Your Requirement"></textarea>
+    <button class="btn btn-success">Send Enquiry</button>
+</form>
+
+{% endblock %}
