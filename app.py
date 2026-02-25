@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, flash, render_template, request, redirect, url_for
 from config import Config
 from models import db, Product, Enquiry, Admin
 from flask import session
@@ -18,9 +18,14 @@ mail = Mail(app)
 with app.app_context():
     db.create_all()
 
+@app.context_processor
+def inject_products():
+    products = Product.query.all()
+    return dict(all_products=products)
+
 @app.route("/")
 def home():
-    products = Product.query.all()
+    products = Product.query.limit(6).all()   # LIMIT 6
     return render_template("index.html", products=products)
 
 def login_required(f):
@@ -110,6 +115,7 @@ def add_product():
 
     name = request.form.get("name")
     description = request.form.get("description")
+    category = request.form.get("category")
     image_file = request.files.get("image")
 
     filename = None
@@ -120,10 +126,10 @@ def add_product():
         image_file.save(image_path)
 
     new_product = Product(
-        name=name,
-        description=description,
-        image=filename
-    )
+    name=name,
+    description=description,
+    category=category,
+    image=filename)
 
     db.session.add(new_product)
     db.session.commit()
@@ -141,6 +147,10 @@ def delete_product(id):
 
     return redirect(url_for("admin_dashboard"))
 
+@app.route("/company-profile")
+def company_profile():
+    return render_template("company_profile.html")
+
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -148,6 +158,52 @@ def about():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
+
+@app.route("/product-enquiry", methods=["POST"])
+def product_enquiry():
+
+    name = request.form.get("name")
+    phone = request.form.get("phone")
+    product_name = request.form.get("product_name")
+
+    # Save to database
+    new_enquiry = Enquiry(
+        name=name,
+        phone=phone,
+        message=f"Callback request for product: {product_name}"
+    )
+    db.session.add(new_enquiry)
+    db.session.commit()
+
+    # Send Email
+    msg = Message(
+        subject="New Product Enquiry - Unirise Barcode",
+        recipients=[app.config["MAIL_USERNAME"]]
+    )
+
+    msg.body = f"""
+    New Callback Request
+
+    Product: {product_name}
+    Name: {name}
+    Phone: {phone}
+    """
+
+    mail.send(msg)
+
+    flash("Thank you! We will contact you shortly.", "success")
+
+    return redirect(url_for("home"))
+
+@app.route("/products")
+def all_products():
+    products = Product.query.all()
+    return render_template("products.html", products=products)
+
+@app.route("/products/<category>")
+def category_products(category):
+    products = Product.query.filter_by(category=category).all()
+    return render_template("products.html", products=products)
 
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER

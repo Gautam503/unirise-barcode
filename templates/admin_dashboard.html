@@ -17,7 +17,14 @@
               name="description"
               placeholder="Product Description"
               required></textarea>
-
+    <select class="form-control mb-2" name="category" required>
+    <option value="">Select Category</option>
+    <option value="Scanner">Scanner</option>
+    <option value="Printer">Printer</option>
+    <option value="RFID">RFID</option>
+    <option value="Mobile Computer">Mobile Computer</option>
+    <option value="Label & Ribbon">Label & Ribbon</option>
+    </select>
     <input type="file" class="form-control mb-2" name="image">
 
     <button class="btn btn-primary">Add Product</button>
