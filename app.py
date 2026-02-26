@@ -7,7 +7,8 @@ from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 from functools import wraps
-
+from flask import request, redirect, url_for, flash
+from flask_login import login_required, current_user
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -150,6 +151,28 @@ def delete_product(id):
 @app.route("/company-profile")
 def company_profile():
     return render_template("company_profile.html")
+
+@app.route("/change-password", methods=["GET", "POST"])
+@login_required
+def change_password():
+
+    if request.method == "POST":
+        old_password = request.form["old_password"]
+        new_password = request.form["new_password"]
+
+        admin = Admin.query.get(current_user.id)
+
+        if not admin.check_password(old_password):
+            flash("Old password incorrect", "danger")
+            return redirect(url_for("change_password"))
+
+        admin.set_password(new_password)
+        db.session.commit()
+
+        flash("Password changed successfully", "success")
+        return redirect(url_for("admin_dashboard"))
+
+    return render_template("change_password.html")
 
 @app.route("/about")
 def about():
