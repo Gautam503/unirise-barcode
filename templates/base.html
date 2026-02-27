@@ -377,6 +377,20 @@
     section {
       padding: 70px 0;
     }
+
+    .product-card {
+      border-radius: 16px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    img {
+      max-height: 450px;
+      object-fit: contain;
+    }
+
+    .product-detail-card {
+      border-radius: 16px;
+    }
   </style>
 </head>
 
@@ -424,6 +438,38 @@
                 </ul>
               </li>
 
+              <!-- LABEL & RIBBON -->
+              <li class="dropdown-submenu position-relative">
+                <a class="dropdown-item dropdown-toggle" href="#">
+                  Label & Ribbon
+                </a>
+                <ul class="dropdown-menu submenu">
+                  {% for product in all_products if product.category == "Label & Ribbon" %}
+                  <li>
+                    <a class="dropdown-item" href="/product/{{ product.id }}">
+                      {{ product.name }}
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+               <!-- Spare Parts -->
+              <li class="dropdown-submenu position-relative">
+                <a class="dropdown-item dropdown-toggle" href="#">
+                  Spare Parts
+                </a>
+                <ul class="dropdown-menu submenu">
+                  {% for product in all_products if product.category == "Spare Parts" %}
+                  <li>
+                    <a class="dropdown-item" href="/product/{{ product.id }}">
+                      {{ product.name }}
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+               
               <!-- SCANNER -->
               <li class="dropdown-submenu position-relative">
                 <a class="dropdown-item dropdown-toggle" href="#">
@@ -472,22 +518,6 @@
                 </ul>
               </li>
 
-              <!-- LABEL & RIBBON -->
-              <li class="dropdown-submenu position-relative">
-                <a class="dropdown-item dropdown-toggle" href="#">
-                  Label & Ribbon
-                </a>
-                <ul class="dropdown-menu submenu">
-                  {% for product in all_products if product.category == "Label & Ribbon" %}
-                  <li>
-                    <a class="dropdown-item" href="/product/{{ product.id }}">
-                      {{ product.name }}
-                    </a>
-                  </li>
-                  {% endfor %}
-                </ul>
-              </li>
-
               <!-- WEIGHT SCALE -->
               <li class="dropdown-submenu position-relative">
                 <a class="dropdown-item dropdown-toggle" href="#">
@@ -522,7 +552,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ url_for('contact') }}">Service & AMC</a></li>
               <li><a class="dropdown-item" href="{{ url_for('contact') }}">Customize Software Solutions</a></li>
-              <li><a class="dropdown-item" href="{{ url_for('contact') }}">Infrastructure & Automation Planning</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('contact') }}">Infra & Automation Planning</a></li>
             </ul>
           </li>
 

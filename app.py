@@ -26,7 +26,7 @@ def inject_products():
 
 @app.route("/")
 def home():
-    products = Product.query.limit(6).all()   # LIMIT 6
+    products = Product.query.limit(3).all()   # LIMIT 6
     return render_template("index.html", products=products)
 
 def login_required(f):
@@ -152,25 +152,29 @@ def delete_product(id):
 def company_profile():
     return render_template("company_profile.html")
 
-@app.route("/change-password", methods=["GET", "POST"])
-@login_required
+@app.route('/change-password', methods=['GET', 'POST'])
 def change_password():
 
-    if request.method == "POST":
-        old_password = request.form["old_password"]
-        new_password = request.form["new_password"]
+    # Check if admin is logged in
+    if "admin" not in session:
+        return redirect(url_for("admin_login"))
 
-        admin = Admin.query.get(current_user.id)
+    admin = Admin.query.first()
+
+    if request.method == "POST":
+
+        old_password = request.form['old_password']
+        new_password = request.form['new_password']
 
         if not admin.check_password(old_password):
-            flash("Old password incorrect", "danger")
-            return redirect(url_for("change_password"))
+            flash("Old password is incorrect", "danger")
+            return redirect(url_for('change_password'))
 
         admin.set_password(new_password)
         db.session.commit()
 
-        flash("Password changed successfully", "success")
-        return redirect(url_for("admin_dashboard"))
+        flash("Password updated successfully", "success")
+        return redirect(url_for('admin_dashboard'))
 
     return render_template("change_password.html")
 
