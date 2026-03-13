@@ -117,6 +117,7 @@ def add_product():
     name = request.form.get("name")
     description = request.form.get("description")
     category = request.form.get("category")
+    subcategory = request.form.get("subcategory")   
     image_file = request.files.get("image")
 
     filename = None
@@ -130,12 +131,18 @@ def add_product():
     name=name,
     description=description,
     category=category,
+    subcategory=subcategory,   # ADDED THIS
     image=filename)
 
     db.session.add(new_product)
     db.session.commit()
 
     return redirect(url_for("admin_dashboard"))
+
+@app.route("/subcategory/<name>")
+def subcategory_products(name):
+    products = Product.query.filter_by(subcategory=name).all()
+    return render_template("products.html", products=products)
 
 @app.route("/admin/delete/<int:id>")
 def delete_product(id):
@@ -224,8 +231,26 @@ def product_enquiry():
 
 @app.route("/products")
 def all_products():
-    products = Product.query.all()
+
+    category = request.args.get("category")
+    subcategory = request.args.get("subcategory")
+    search = request.args.get("search")
+
+    query = Product.query
+
+    if category:
+        query = query.filter(Product.category == category)
+
+    if subcategory:
+        query = query.filter(Product.subcategory == subcategory)
+
+    if search:
+        query = query.filter(Product.name.ilike(f"%{search}%"))
+
+    products = query.all()
+
     return render_template("products.html", products=products)
+
 
 @app.route("/products/<category>")
 def category_products(category):

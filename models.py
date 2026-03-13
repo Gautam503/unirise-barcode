@@ -9,6 +9,7 @@ class Product(db.Model):
     name = db.Column(db.String(150), nullable=False)
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(100))   # ADDED THIS
+    subcategory = db.Column(db.String(100))
     image = db.Column(db.String(200))
     created_at = db.Column(db.DateTime)
 

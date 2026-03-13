@@ -74,39 +74,6 @@
       text-align: center;
     }
 
-    /* Multi-level dropdown */
-    .dropdown-submenu {
-      position: relative;
-    }
-
-    .dropdown-submenu:hover .dropdown-menu {
-      display: block;
-    }
-
-    .dropdown-menu {
-      background-color: #0a192f;
-    }
-
-    .dropdown-item {
-      color: white;
-    }
-
-    .dropdown-item:hover {
-      background-color: #0a192f;
-      color: white;
-    }
-
-    .dropdown-submenu .submenu {
-      display: none;
-      position: absolute;
-      right: 100%;
-      top: 0;
-    }
-
-    .dropdown-submenu:hover .submenu {
-      display: block;
-    }
-
     .card {
       border-radius: 12px;
     }
@@ -391,6 +358,85 @@
     .product-detail-card {
       border-radius: 16px;
     }
+
+    /* MAIN DROPDOWN (Our Products) */
+    .navbar .dropdown:hover>.dropdown-menu {
+      display: block;
+    }
+
+    /* SUBMENU CONTAINER */
+    .dropdown-submenu {
+      position: relative;
+    }
+
+    /* SUBMENU HIDDEN BY DEFAULT */
+    .dropdown-submenu .dropdown-menu {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      margin-top: -1px;
+    }
+
+    /* SHOW SUBMENU ONLY WHEN HOVERING PARENT ITEM */
+    .dropdown-submenu:hover>.dropdown-menu {
+      display: block;
+    }
+
+    /* Dropdown background */
+    .navbar .dropdown-menu {
+      background-color: #0a192f;
+      border: none;
+    }
+
+    /* Dropdown text */
+    .navbar .dropdown-item {
+      color: #cbd5e1;
+      padding: 10px 18px;
+    }
+
+    /* Hover effect */
+    .navbar .dropdown-item:hover {
+      background-color: #112240;
+      color: #1743f1;
+    }
+
+    /* Submenu background */
+    .dropdown-submenu .dropdown-menu {
+      background-color: #0a192f;
+    }
+
+    /* Divider */
+    .dropdown-divider {
+      border-color: #1f2d45;
+    }
+
+    .navbar-search input {
+      border-radius: 20px;
+    }
+
+    .navbar-search button {
+      border-radius: 20px;
+    }
+
+    /* Navbar search compact */
+    .navbar-search input {
+      height: 34px;
+      width: 180px;
+      font-size: 14px;
+      padding: 4px 10px;
+    }
+
+    .navbar-search button {
+      height: 34px;
+      width: 40px;
+      padding: 4px;
+      font-size: 14px;
+    }
+
+    .navbar-search {
+      align-items: center;
+    }
   </style>
 </head>
 
@@ -409,12 +455,18 @@
 
         <ul class="navbar-nav ms-auto">
 
+          <form class="d-flex ms-3 navbar-search" action="/products" method="GET">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search products">
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
 
           <!-- PRODUCTS DROPDOWN -->
-
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown">
               Our Products
@@ -422,125 +474,105 @@
 
             <ul class="dropdown-menu">
 
-              <!-- PRINTER -->
-              <li class="dropdown-submenu position-relative">
-                <a class="dropdown-item dropdown-toggle" href="#">
+              <!-- BARCODE PRINTER -->
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="/products?category=Barcode Printer">
                   Barcode Printer
                 </a>
+
                 <ul class="dropdown-menu submenu">
-                  {% for product in all_products if product.category == "Printer" %}
+
                   <li>
-                    <a class="dropdown-item" href="/product/{{ product.id }}">
-                      {{ product.name }}
+                    <a class="dropdown-item" href="/products?subcategory=Industrial Printer">
+                      Industrial Printer
                     </a>
                   </li>
-                  {% endfor %}
+
+                  <li>
+                    <a class="dropdown-item" href="/products?subcategory=Desktop Printer">
+                      Desktop Printer
+                    </a>
+                  </li>
+
+                  <li>
+                    <a class="dropdown-item" href="/products?subcategory=Mobile Printer">
+                      Mobile Printer
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
+              <!-- BARCODE SCANNER -->
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="/products?category=Barcode Scanner">
+                  Barcode Scanner
+                </a>
+
+                <ul class="dropdown-menu submenu">
+                  <li>
+                    <a class="dropdown-item" href="/products?subcategory=Wired Scanner">
+                      Wired Scanner
+                    </a>
+                  </li>
+
+                  <li>
+                    <a class="dropdown-item" href="/products?subcategory=Wireless Scanner">
+                      Wireless Scanner
+                    </a>
+                  </li>
+
+                  <li>
+                    <a class="dropdown-item" href="/products?subcategory=Fixmount Scanner">
+                      Fixmount Scanner
+                    </a>
+                  </li>
+
                 </ul>
               </li>
 
               <!-- LABEL & RIBBON -->
-              <li class="dropdown-submenu position-relative">
-                <a class="dropdown-item dropdown-toggle" href="#">
+              <li>
+                <a class="dropdown-item" href="/products?category=Label & Ribbon">
                   Label & Ribbon
                 </a>
-                <ul class="dropdown-menu submenu">
-                  {% for product in all_products if product.category == "Label & Ribbon" %}
-                  <li>
-                    <a class="dropdown-item" href="/product/{{ product.id }}">
-                      {{ product.name }}
-                    </a>
-                  </li>
-                  {% endfor %}
-                </ul>
               </li>
 
-               <!-- Spare Parts -->
-              <li class="dropdown-submenu position-relative">
-                <a class="dropdown-item dropdown-toggle" href="#">
+              <!-- SPARE PARTS -->
+              <li>
+                <a class="dropdown-item" href="/products?category=Spare Parts">
                   Spare Parts
                 </a>
-                <ul class="dropdown-menu submenu">
-                  {% for product in all_products if product.category == "Spare Parts" %}
-                  <li>
-                    <a class="dropdown-item" href="/product/{{ product.id }}">
-                      {{ product.name }}
-                    </a>
-                  </li>
-                  {% endfor %}
-                </ul>
-              </li>
-               
-              <!-- SCANNER -->
-              <li class="dropdown-submenu position-relative">
-                <a class="dropdown-item dropdown-toggle" href="#">
-                  Barcode Scanner
-                </a>
-                <ul class="dropdown-menu submenu">
-                  {% for product in all_products if product.category == "Scanner" %}
-                  <li>
-                    <a class="dropdown-item" href="/product/{{ product.id }}">
-                      {{ product.name }}
-                    </a>
-                  </li>
-                  {% endfor %}
-                </ul>
-              </li>
-
-              <!-- RFID -->
-              <li class="dropdown-submenu position-relative">
-                <a class="dropdown-item dropdown-toggle" href="#">
-                  RFID
-                </a>
-                <ul class="dropdown-menu submenu">
-                  {% for product in all_products if product.category == "RFID" %}
-                  <li>
-                    <a class="dropdown-item" href="/product/{{ product.id }}">
-                      {{ product.name }}
-                    </a>
-                  </li>
-                  {% endfor %}
-                </ul>
               </li>
 
               <!-- MOBILE COMPUTER -->
-              <li class="dropdown-submenu position-relative">
-                <a class="dropdown-item dropdown-toggle" href="#">
+              <li>
+                <a class="dropdown-item" href="/products?category=Mobile Computer">
                   Mobile Computer
                 </a>
-                <ul class="dropdown-menu submenu">
-                  {% for product in all_products if product.category == "Mobile Computer" %}
-                  <li>
-                    <a class="dropdown-item" href="/product/{{ product.id }}">
-                      {{ product.name }}
-                    </a>
-                  </li>
-                  {% endfor %}
-                </ul>
               </li>
 
-              <!-- WEIGHT SCALE -->
-              <li class="dropdown-submenu position-relative">
-                <a class="dropdown-item dropdown-toggle" href="#">
-                  Weight Scale
+              <!-- RFID -->
+              <li>
+                <a class="dropdown-item" href="/products?category=RFID">
+                  RFID
                 </a>
-                <ul class="dropdown-menu submenu">
-                  {% for product in all_products if product.category == "Weight Scale" %}
-                  <li>
-                    <a class="dropdown-item" href="/product/{{ product.id }}">
-                      {{ product.name }}
-                    </a>
-                  </li>
-                  {% endfor %}
-                </ul>
               </li>
 
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="/products">View All Products</a></li>
+
+              <!-- ALL PRODUCTS -->
+              <li>
+                <a class="dropdown-item" href="/products">
+                  View All Products
+                </a>
+              </li>
 
             </ul>
           </li>
+
           <li class="nav-item">
             <a class="nav-link" href="/company-profile">Company Profile</a>
           </li>
@@ -552,7 +584,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ url_for('contact') }}">Service & AMC</a></li>
               <li><a class="dropdown-item" href="{{ url_for('contact') }}">Customize Software Solutions</a></li>
-              <li><a class="dropdown-item" href="{{ url_for('contact') }}">Infra & Automation Planning</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('contact') }}">Ai Vision Solutions</a></li>
             </ul>
           </li>
 
@@ -582,6 +614,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="bootstrap.bundle.min.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
