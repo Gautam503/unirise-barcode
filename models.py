@@ -12,6 +12,7 @@ class Product(db.Model):
     subcategory = db.Column(db.String(100))
     image = db.Column(db.String(200))
     created_at = db.Column(db.DateTime)
+    featured = db.Column(db.Boolean, default=False)   # NEW
 
 class Enquiry(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -133,17 +133,6 @@
       color: white;
     }
 
-    .carousel-item {
-      height: 450px;
-    }
-
-    .carousel-item img {
-      height: 100%;
-      width: 100%;
-      object-fit: fill;
-      /* clean full banner */
-    }
-
     .navbar .nav-link {
       color: #cbd5e1 !important;
     }
@@ -437,6 +426,119 @@
     .navbar-search {
       align-items: center;
     }
+
+    /* MOBILE NAVBAR FIX */
+    @media (max-width: 991px) {
+
+      .dropdown-submenu .dropdown-menu {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin-left: 20px;
+        display: none;
+      }
+
+      .dropdown-submenu.show>.dropdown-menu {
+        display: block;
+      }
+
+    }
+
+    /* Navbar search desktop */
+    .navbar-search input {
+      height: 34px;
+      width: 200px;
+    }
+
+    .navbar-search button {
+      height: 34px;
+      width: 42px;
+    }
+
+    /* MOBILE SEARCH LAYOUT */
+    @media (max-width:991px) {
+
+      .navbar-search {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .navbar-search input {
+        width: 100%;
+      }
+
+    }
+
+    @media (max-width:991px) {
+
+      .navbar-brand {
+        font-size: 18px;
+      }
+
+      .navbar-toggler {
+        margin-left: auto;
+      }
+
+    }
+
+    @media (max-width:991px) {
+
+      .navbar-brand {
+        font-size: 18px;
+      }
+
+      .navbar {
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+    }
+
+    @media (max-width:991px) {
+
+      .product-card img {
+        max-height: 200px;
+      }
+
+    }
+
+    @media (max-width:991px) {
+
+      .category-circle {
+        width: 110px;
+        height: 110px;
+      }
+
+    }
+
+    @media (max-width:991px) {
+
+      .category-circle {
+        width: 110px;
+        height: 110px;
+      }
+    }
+
+    @media (max-width:991px) {
+
+      .navbar-nav .nav-link {
+        padding: 12px 0;
+        font-size: 16px;
+      }
+
+    }
+
+    .carousel-item img {
+      height: 450px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width:768px) {
+      .carousel-item img {
+        height: 250px;
+      }
+    }
   </style>
 </head>
 
@@ -455,7 +557,7 @@
 
         <ul class="navbar-nav ms-auto">
 
-          <form class="d-flex ms-3 navbar-search" action="/products" method="GET">
+          <form class="navbar-search d-flex" action="/products" method="GET">
             <input class="form-control me-2" type="search" name="search" placeholder="Search products">
             <button class="btn btn-primary" type="submit">
               <i class="fas fa-search"></i>
@@ -473,39 +575,9 @@
             </a>
 
             <ul class="dropdown-menu">
-
-              <!-- BARCODE PRINTER -->
-              <li class="dropdown-submenu">
-                <a class="dropdown-item dropdown-toggle" href="/products?category=Barcode Printer">
-                  Barcode Printer
-                </a>
-
-                <ul class="dropdown-menu submenu">
-
-                  <li>
-                    <a class="dropdown-item" href="/products?subcategory=Industrial Printer">
-                      Industrial Printer
-                    </a>
-                  </li>
-
-                  <li>
-                    <a class="dropdown-item" href="/products?subcategory=Desktop Printer">
-                      Desktop Printer
-                    </a>
-                  </li>
-
-                  <li>
-                    <a class="dropdown-item" href="/products?subcategory=Mobile Printer">
-                      Mobile Printer
-                    </a>
-                  </li>
-
-                </ul>
-              </li>
-
               <!-- BARCODE SCANNER -->
               <li class="dropdown-submenu">
-                <a class="dropdown-item dropdown-toggle" href="/products?category=Barcode Scanner">
+                <a class="dropdown-item dropdown-toggle" href="/products?category=Scanner">
                   Barcode Scanner
                 </a>
 
@@ -530,10 +602,43 @@
 
                 </ul>
               </li>
+              <!-- BARCODE PRINTER -->
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="/products?category=Printer">
+                  Label Printer
+                </a>
+
+                <ul class="dropdown-menu submenu">
+                  <li>
+                    <a class="dropdown-item" href="/products?subcategory=Industrial Printer">
+                      Industrial Printer
+                    </a>
+                  </li>
+
+                  <li>
+                    <a class="dropdown-item" href="/products?subcategory=Desktop Printer">
+                      Desktop Printer
+                    </a>
+                  </li>
+
+                  <li>
+                    <a class="dropdown-item" href="/products?subcategory=Mobile Printer">
+                      Mobile Printer
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+              <!-- MOBILE COMPUTER -->
+              <li>
+                <a class="dropdown-item" href="/products?category=Mobile Computer">
+                  Mobile Computer
+                </a>
+              </li>
 
               <!-- LABEL & RIBBON -->
               <li>
-                <a class="dropdown-item" href="/products?category=Label & Ribbon">
+                <a class="dropdown-item" href="/products?category=LabelRibbon">
                   Label & Ribbon
                 </a>
               </li>
@@ -541,14 +646,7 @@
               <!-- SPARE PARTS -->
               <li>
                 <a class="dropdown-item" href="/products?category=Spare Parts">
-                  Spare Parts
-                </a>
-              </li>
-
-              <!-- MOBILE COMPUTER -->
-              <li>
-                <a class="dropdown-item" href="/products?category=Mobile Computer">
-                  Mobile Computer
+                  Spare Parts & Accessories
                 </a>
               </li>
 
@@ -582,9 +680,10 @@
               Solutions
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{{ url_for('contact') }}">Service & AMC</a></li>
-              <li><a class="dropdown-item" href="{{ url_for('contact') }}">Customize Software Solutions</a></li>
-              <li><a class="dropdown-item" href="{{ url_for('contact') }}">Ai Vision Solutions</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('service_amc') }}">Service & AMC</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('software_solution') }}">Customize Software Solutions</a>
+              </li>
+              <li><a class="dropdown-item" href="{{ url_for('vision_solution') }}">Ai Vision Solutions</a></li>
             </ul>
           </li>
 
@@ -618,6 +717,29 @@
   <script src="bootstrap.bundle.min.js"></script>
   <script src="bootstrap.bundle.min.js"></script>
   <script src="bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      if (window.innerWidth < 992) {
+
+        document.querySelectorAll(".dropdown-submenu > a").forEach(function (el) {
+
+          el.addEventListener("click", function (e) {
+
+            let parent = this.parentElement;
+
+            e.preventDefault();
+
+            parent.classList.toggle("show");
+
+          });
+
+        });
+
+      }
+
+    });
+  </script>
 </body>
 
 </html>

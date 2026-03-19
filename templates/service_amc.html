@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="py-5 text-white" style="background: linear-gradient(120deg,#0b1f3a,#1c3d6e);">
+  <div class="container text-center">
+    <h1 class="fw-bold">Service & AMC Solutions</h1>
+    <p class="mt-3">Reliable support for barcode printers, scanners & industrial automation systems</p>
+  </div>
+</section>
+
+
+<!-- MAIN SECTION -->
+<div class="container my-5">
+
+  <div class="row align-items-center">
+
+    <!-- IMAGE -->
+    <div class="col-md-6">
+      <img src="{{ url_for('static', filename='images/app2.png') }}"
+           class="img-fluid rounded shadow">
+    </div>
+
+    <!-- TEXT -->
+    <div class="col-md-6">
+      <h3 class="fw-bold mb-3">Complete AMC & Support</h3>
+      <p class="text-muted">
+        We provide Annual Maintenance Contracts (AMC) for barcode printers,
+        scanners, RFID systems, and warehouse automation solutions.
+        Our expert engineers ensure quick service and zero downtime.
+      </p>
+
+      <ul class="mt-3">
+        <li>✔ On-site Support</li>
+        <li>✔ Preventive Maintenance</li>
+        <li>✔ Spare Parts Replacement</li>
+        <li>✔ Remote Troubleshooting</li>
+      </ul>
+
+      <a href="{{ url_for('contact') }}" class="btn btn-primary mt-3">
+        Request Service
+      </a>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- FEATURES SECTION -->
+<div class="container mb-5">
+
+  <h2 class="text-center fw-bold mb-4">Why Choose Our AMC?</h2>
+
+  <div class="row text-center">
+
+    <div class="col-md-3">
+      <div class="card p-4 shadow-sm h-100">
+        <h5>24/7 Support</h5>
+        <p class="text-muted">Quick response for all breakdown issues</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card p-4 shadow-sm h-100">
+        <h5>Expert Engineers</h5>
+        <p class="text-muted">Certified technical team</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card p-4 shadow-sm h-100">
+        <h5>Fast Repair</h5>
+        <p class="text-muted">Minimum downtime guaranteed</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card p-4 shadow-sm h-100">
+        <h5>Affordable Plans</h5>
+        <p class="text-muted">Flexible AMC packages</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- PROCESS SECTION -->
+<section class="py-5" style="background:#f8f9fa;">
+  <div class="container">
+
+    <h2 class="text-center fw-bold mb-4">Our Service Process</h2>
+
+    <div class="row text-center">
+
+      <div class="col-md-3">
+        <h4>150</h4>
+        <p>Request Raised</p>
+      </div>
+
+      <div class="col-md-3">
+        <h4>15</h4>
+        <p>Engineer Assigned</p>
+      </div>
+
+      <div class="col-md-3">
+        <h4>135</h4>
+        <p>Issue Resolved</p>
+      </div>
+
+      <div class="col-md-3">
+        <h4>109</h4>
+        <p>Feedback & Support</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CALL TO ACTION -->
+<section class="py-5 text-center text-white" style="background:#0b1f3a;">
+  <div class="container">
+    <h2>Need Immediate Support?</h2>
+    <p class="mt-2">Contact our team for quick assistance</p>
+    <a href="{{ url_for('contact') }}" class="btn btn-light mt-3">
+      Contact Us
+    </a>
+  </div>
+</section>
+
+{% endblock %}

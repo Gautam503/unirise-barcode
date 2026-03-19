@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="py-5 text-white" style="background: linear-gradient(120deg,#0b1f3a,#1c3d6e);">
+  <div class="container text-center">
+    <h1 class="fw-bold">AI Vision Solutions</h1>
+    <p class="mt-3">Advanced machine vision systems for industrial automation & inspection</p>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div class="container my-5">
+  <div class="row align-items-center">
+
+    <!-- IMAGE 1 -->
+    <div class="col-md-6">
+      <img src="{{ url_for('static', filename='images/app3.png') }}"
+           class="img-fluid rounded shadow mb-3">
+    </div>
+
+    <!-- TEXT -->
+    <div class="col-md-6">
+      <h3 class="fw-bold mb-3">Smart Industrial Vision</h3>
+      <p class="text-muted">
+        Our AI-based vision systems help industries automate inspection,
+        barcode reading, quality control and production line monitoring.
+      </p>
+
+      <ul class="mt-3">
+        <li>✔ Quality Inspection</li>
+        <li>✔ Defect Detection</li>
+        <li>✔ Barcode & OCR Reading</li>
+        <li>✔ Production Automation</li>
+      </ul>
+
+      <a href="{{ url_for('contact') }}" class="btn btn-primary mt-3">
+        Get Consultation
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECOND IMAGE SECTION -->
+<div class="container mb-5">
+  <div class="row align-items-center">
+
+    <div class="col-md-6">
+      <h3 class="fw-bold">Where It’s Used</h3>
+      <p class="text-muted">
+        Our solutions are used in manufacturing, logistics, pharmaceuticals,
+        and automotive industries for high-speed inspection and automation.
+      </p>
+    </div>
+
+    <div class="col-md-6">
+      <img src="{{ url_for('static', filename='images/app4.png') }}"
+           class="img-fluid rounded shadow">
+    </div>
+
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="container mb-5">
+  <h2 class="text-center fw-bold mb-4">Key Capabilities</h2>
+
+  <div class="row text-center">
+
+    <div class="col-md-3">
+      <div class="card p-4 shadow-sm h-100">
+        <h5>High Accuracy</h5>
+        <p class="text-muted">AI-powered precision detection</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card p-4 shadow-sm h-100">
+        <h5>Real-Time Processing</h5>
+        <p class="text-muted">Instant inspection results</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card p-4 shadow-sm h-100">
+        <h5>Automation</h5>
+        <p class="text-muted">Reduce manual inspection</p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card p-4 shadow-sm h-100">
+        <h5>Scalable</h5>
+        <p class="text-muted">Works for any production size</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="py-5 text-center text-white" style="background:#0b1f3a;">
+  <div class="container">
+    <h2>Upgrade Your Production Line</h2>
+    <p>Implement AI Vision for better accuracy & speed</p>
+    <a href="{{ url_for('contact') }}" class="btn btn-light mt-3">
+      Contact Us
+    </a>
+  </div>
+</section>
+
+{% endblock %}

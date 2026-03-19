@@ -26,8 +26,8 @@ def inject_products():
 
 @app.route("/")
 def home():
-    products = Product.query.limit(3).all()   # LIMIT 6
-    return render_template("index.html", products=products)
+    latest_products = Product.query.filter_by(featured=True).limit(3).all()
+    return render_template("index.html", latest_products=latest_products)
 
 def login_required(f):
     @wraps(f)
@@ -109,16 +109,20 @@ def admin_logout():
     session.pop("admin", None)
     return redirect(url_for("home"))
 
-@app.route("/admin/add-product", methods=["POST"])
+@app.route("/admin/add-product", methods=["GET","POST"])
 def add_product():
+
     if "admin" not in session:
         return redirect(url_for("admin_login"))
 
     name = request.form.get("name")
     description = request.form.get("description")
     category = request.form.get("category")
-    subcategory = request.form.get("subcategory")   
+    subcategory = request.form.get("subcategory")
     image_file = request.files.get("image")
+
+    # FEATURED PRODUCT
+    featured = True if request.form.get("featured") else False
 
     filename = None
 
@@ -128,11 +132,13 @@ def add_product():
         image_file.save(image_path)
 
     new_product = Product(
-    name=name,
-    description=description,
-    category=category,
-    subcategory=subcategory,   # ADDED THIS
-    image=filename)
+        name=name,
+        description=description,
+        category=category,
+        subcategory=subcategory,
+        image=filename,
+        featured=featured
+    )
 
     db.session.add(new_product)
     db.session.commit()
@@ -256,6 +262,19 @@ def all_products():
 def category_products(category):
     products = Product.query.filter_by(category=category).all()
     return render_template("products.html", products=products)
+
+@app.route("/service-amc")
+def service_amc():
+    return render_template("service_amc.html")
+
+@app.route("/software-solution")
+def software_solution():
+    return render_template("software_solution.html")
+
+
+@app.route("/vision-solution")
+def vision_solution():
+    return render_template("vision_solution.html")
 
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
