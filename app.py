@@ -9,6 +9,8 @@ from flask_mail import Mail, Message
 from functools import wraps
 from flask import request, redirect, url_for, flash
 from flask_login import login_required, current_user
+from flask import send_from_directory
+import re
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -275,6 +277,11 @@ def software_solution():
 @app.route("/vision-solution")
 def vision_solution():
     return render_template("vision_solution.html")
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('static', 'sitemap.xml')
+
 
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
