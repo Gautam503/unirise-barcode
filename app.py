@@ -63,7 +63,7 @@ def enquiry():
     # Send email to admin
     msg = Message(
         subject="New Enquiry - Unirise Barcode",
-        recipients=["gautam2002jha@gmail.com"]
+        recipients=["gpljha.medi@gmail.com"]
     )
 
     msg.body = f"""

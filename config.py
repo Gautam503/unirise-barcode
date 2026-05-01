@@ -7,7 +7,7 @@ class Config:
     MAIL_SERVER = "smtp.gmail.com"
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = "gautam2002jha@gmail.com"
-    MAIL_PASSWORD = "yetfjcxltnvqplza"
-    MAIL_DEFAULT_SENDER = "gautam2002jha@gmail.com"
+    MAIL_USERNAME = "gpljha.medi@gmail.com"
+    MAIL_PASSWORD = "exytrcneoxgwddoe"
+    MAIL_DEFAULT_SENDER = "gpljha.medi@gmail.com"
 
